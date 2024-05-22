@@ -13,7 +13,7 @@ class Category(models.Model):
 class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=Category, related_name='books', verbose_name="Bo'lim")
     title = models.CharField(max_length=255, verbose_name="Sarlavha")
-    sub_title = models.CharField(max_length=255, null=True, blank=True, verbose_name="Sarlavha osti")
+    year = models.CharField(max_length=255, null=True, blank=True, verbose_name="Kitob chiqarilgan yil")
     author = models.CharField(max_length=255, verbose_name="Avtor")
     book_link = models.CharField(max_length=255, verbose_name="Kitob manzili")
     isbn = models.IntegerField(null=True, blank=True)
