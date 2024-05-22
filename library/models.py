@@ -2,14 +2,16 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name="Kategoriya")
+    name = models.CharField(max_length=255, verbose_name="Bo'lim")
+
+    objects = models.Manager()
 
     def __str__(self):
         return self.name
 
 
 class Book(models.Model):
-    category = models.ForeignKey(Category, on_delete=Category, related_name='books', verbose_name="Kategoriya")
+    category = models.ForeignKey(Category, on_delete=Category, related_name='books', verbose_name="Bo'lim")
     title = models.CharField(max_length=255, verbose_name="Sarlavha")
     sub_title = models.CharField(max_length=255, null=True, blank=True, verbose_name="Sarlavha osti")
     author = models.CharField(max_length=255, verbose_name="Avtor")
@@ -22,3 +24,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-create_time']

@@ -1,8 +1,17 @@
 asgiref==3.8.1
 Django==5.0.6
+django-filter==24.2
+djangorestframework==3.15.1
+drf-yasg==1.21.7
 environs==11.0.0
+inflection==0.5.1
+Markdown==3.6
 marshmallow==3.21.2
 packaging==24.0
 python-dotenv==1.0.1
+pytz==2024.1
+PyYAML==6.0.1
+setuptools==70.0.0
 sqlparse==0.5.0
+uritemplate==4.1.1
 whitenoise==6.6.0
