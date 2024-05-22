@@ -19,3 +19,15 @@ class BookSerializer(serializers.ModelSerializer):
 
     def get_category(self, obj):
         return CategorySerializer(obj.category).data
+
+
+class BooksRelatedToCategoriesSerializer(serializers.ModelSerializer):
+    books = serializers.SerializerMethodField('get_books')
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'books']
+
+    def get_books(self, obj):
+        books = Book.objects.filter(category__id=obj.id)
+        return BookSerializer(books, many=True).data
