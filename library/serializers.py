@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework import serializers
 
 from library.models import Book, Category
@@ -12,13 +13,19 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     category = serializers.SerializerMethodField('get_category')
+    book_link = serializers.SerializerMethodField('get_book_file_url')
 
     class Meta:
         model = Book
-        fields = ['id', 'category', 'title', 'year', 'author', 'book_link', 'isbn', 'create_time', 'update_time']
+        fields = ['id', 'category', 'title', 'sub_title', 'author', 'book_link', 'isbn', 'create_time', 'update_time']
 
     def get_category(self, obj):
         return CategorySerializer(obj.category).data
+
+    def get_book_file_url(self, obj):
+        if obj.book_file:
+            return obj.book_file.url
+        return obj.book_link or "No link available"
 
 
 class BooksRelatedToCategoriesSerializer(serializers.ModelSerializer):

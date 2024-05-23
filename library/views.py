@@ -13,7 +13,15 @@ class BookListAPIView(ListAPIView):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 
+    def get_serializer_context(self):
+        return {'request': self.request}
+
 
 class BooksRelatedToCategoriesListApiView(ListAPIView):
     serializer_class = BooksRelatedToCategoriesSerializer
     queryset = Category.objects.all()
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
