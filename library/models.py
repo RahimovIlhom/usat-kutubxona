@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
@@ -30,3 +31,8 @@ class Book(models.Model):
 
     class Meta:
         ordering = ['-create_time']
+
+    def clean(self):
+        super().clean()
+        if not self.book_link and not self.book_file:
+            raise ValidationError("Kamida bitta maydon (kitob manzili yoki kitob fayli) kiritilishi kerak.")

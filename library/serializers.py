@@ -23,8 +23,9 @@ class BookSerializer(serializers.ModelSerializer):
         return CategorySerializer(obj.category).data
 
     def get_book_file_url(self, obj):
+        request = self.context.get("request")
         if obj.book_file:
-            return obj.book_file.url
+            return request.build_absolute_uri(obj.book_file.url)
         return obj.book_link or "No link available"
 
 
@@ -37,4 +38,4 @@ class BooksRelatedToCategoriesSerializer(serializers.ModelSerializer):
 
     def get_books(self, obj):
         books = Book.objects.filter(category__id=obj.id)
-        return BookSerializer(books, many=True).data
+        return BookSerializer(books, many=True, context=self.context).data
