@@ -21,6 +21,20 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://api-library.usat.uz',
+    'https://library.usat.uz',
+    'https://kutubxona.usat.uz',
+    'http://kutubxona.usat.uz',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
+CSRF_COOKIE_SECURE = True
+CSRF_USE_SESSIONS = False
+
 # Application definition
 
 INSTALLED_APPS = [
